@@ -45,10 +45,13 @@ EOF
 
 end
 
+# a helper taken from github.com/appoptics/appoptics-services
 def unindent(string)
     indentation = string[/\A\s*/]
     string.strip.gsub(/^#{indentation}/, "") + "\n"
 end
+
+# I roughly tried to structure the messages in the way I saw the email
 events = [
     { "source_name" => "mgmt-shovel",
         "program" => "app/worker.1",
@@ -73,4 +76,4 @@ events = [
         "message" => "[ERROR] CloudAMQP: silver-asdf que Net::Something" },
 ]
 
-puts html_email post_params_to_event_hash events
+# puts html_email post_params_to_event_hash events
