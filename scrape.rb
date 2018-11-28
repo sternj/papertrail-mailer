@@ -1,28 +1,3 @@
-events = [
-    { "source_name" => "mgmt-shovel",
-        "program" => "app/worker.1",
-        "message" => "[ERROR] CloudAMQP: silver-asdf que Net::Something" },
-    { "source_name" => "mgmt-shovel",
-    "program" => "app/worker.1",
-    "message" => "[WARN] CloudAMQP: silver-goose queues Net:: Something" },
-    { "source_name" => "mgmt-shovel",
-        "program" => "app/worker.1",
-        "message" => "[ERROR] CloudAMQP: silver-asdf que Net::Something" },
-    { "source_name" => "mgmt-shovel",
-    "program" => "app/worker.1",
-    "message" => "[WARN] CloudAMQP: silver-goose queues Net:: Something" },
-    { "source_name" => "mgmt-shovel",
-    "program" => "app/worker.1",
-    "message" => "[WARN] CloudAMQP: silver-goose queues Net:: Something" },
-    { "source_name" => "mgmt-shovel",
-        "program" => "app/worker.1",
-        "message" => "[ERROR] CloudAMQP: silver-asdf que Net::Something" },
-    { "source_name" => "mgmt-shovel",
-        "program" => "app/worker.1",
-        "message" => "[ERROR] CloudAMQP: silver-asdf que Net::Something" },
-]
-
-
 def post_params_to_event_hash(events)
     # Note-- current format in emails is dictated by 
     # github.com/papertrail-services/lib/papertrail_services/helpers/logs_helpers.rb
@@ -49,6 +24,10 @@ def post_params_to_event_hash(events)
         level, rest_of_message = split_event.first, split_event[1..-1].join(' ')
         number_of_events = return_hash[event["source_name"]][event["program"]][level][rest_of_message]
         number_of_events = number_of_events.is_a?(Integer) ? number_of_events : 0
+        # I put this on a second line because the alternative is (I think) a ternary expression,
+        # which would require a pair of lookups rather than just the one. 
+        # I suspect that Ruby may have a more elegant way, 
+        # but two lines isn't too much
         return_hash[event["source_name"]][event["program"]][level][rest_of_message] = number_of_events + 1
     end
     return_hash

@@ -1,6 +1,5 @@
 require 'erb'
 require 'mail'
-require './scrape'
 
 def html_email(messages_hash)
     ERB.new(unindent(<<-EOF), nil, '-').result(binding)
@@ -52,6 +51,9 @@ def unindent(string)
 end
 
 # I roughly tried to structure the messages in the way I saw the email
+
+# note that THIS IS AN EXAMPLE
+# The information that is in the image is in webhook-test.rb
 events = [
     { "source_name" => "mgmt-shovel",
         "program" => "app/worker.1",
