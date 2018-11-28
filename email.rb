@@ -23,15 +23,15 @@ def html_email(messages_hash)
     <body>
         <% messages_hash.each do |source, events| -%>
             <dl>
-            <dt> <%= source %> </dt>
+            <dt> Source: <%= source %> </dt> <br />
             <% events.each do |program, issues| -%>
                 <dd>
-                <%= program %><br />
+                Program: <span style="font-weight: bold"><%= program %></span><br /> <br / >
                 <% issues.each do |level, messages| -%>
-                    <span style='font-weight: bold;'> <%= level %> </span>
+                    <span style='font-weight: 600;'> <%= level %> </span>
                     <ul>
                     <% messages.each do |message, count| -%>
-                        <li> <%= message %> : <%= count %> </li>
+                        <li> "<%= message %>" : <%= count %> rows </li>
                     <% end -%>
                     </ul>
                 <% end -%>
