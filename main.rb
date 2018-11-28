@@ -15,7 +15,7 @@ class PapertrailMailer < Sinatra::Base
         Mail.deliver do
             from     'sternj@cs.brandeis.edu'
             to       'sternj@cs.brandeis.edu'
-            subject  'papertrail logs'
+            subject  'more papertrail logs'
             html_part do
                 content_type 'text/html; charset=UTF-8'
                 body email
